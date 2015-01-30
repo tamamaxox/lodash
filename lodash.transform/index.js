@@ -1,5 +1,5 @@
 /**
- * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+ * lodash 3.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modern modularize exports="npm" -o ./`
  * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
@@ -11,6 +11,7 @@ var arrayEach = require('lodash._arrayeach'),
     baseCreate = require('lodash._basecreate'),
     baseFor = require('lodash._basefor'),
     isArray = require('lodash.isarray'),
+    isFunction = require('lodash.isfunction'),
     isTypedArray = require('lodash.istypedarray'),
     keys = require('lodash.keys');
 
@@ -97,7 +98,7 @@ function transform(object, iteratee, accumulator, thisArg) {
       if (isArr) {
         accumulator = isArray(object) ? new Ctor : [];
       } else {
-        accumulator = baseCreate(typeof Ctor == 'function' && Ctor.prototype);
+        accumulator = baseCreate(isFunction(Ctor) && Ctor.prototype);
       }
     } else {
       accumulator = {};
