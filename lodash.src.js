@@ -9624,6 +9624,51 @@
       return baseRandom(min, max);
     }
 
+    /**
+     * Returns `true` if the number determined by `value` is inside the loose range (using >= and <=) specified by
+     * `start` and `end` or returns `false` if the number determined by `value` is not in the specified range.
+     * Can be used with integer and floating point `value`. If `end` isn't specified, `start` defaults to `end` and
+     * real `start` becomes zero.
+     *
+     * @static
+     * @memberOf _
+     * @category Number
+     * @param {number} value Value that is being tested.
+     * @param {number} [start=0] Lower bounds for the range.
+     * @param {number} end Upper bounds for the range.
+     * @returns {boolean} Returns boolean.
+     * @example
+     *
+     * _.inRange(0, 5, 3);
+     * // => true
+     *
+     * _.inRange(5, 9);
+     * // => true
+     *
+     * _.inRange(5, 3);
+     * // => false
+     *
+     * _.inRange(0, 5, 3.15);
+     * // => true
+     *
+     * _.inRange(0, 5, 6);
+     * // => false
+     *
+     * ->inRange(0, 5, 6.15);
+     * // => false
+     *
+     * _.inRange(0, 5, 5);
+     * // => true
+     */
+    function inRange(value, start, end) {
+      if(typeof end === "undefined") {
+        end = start;
+        start = 0;
+      }
+      value % 1 === 0 ? value = parseInt(value) : value = parseFloat(value);
+      return(value >= start && value <= end);
+    }
+
     /*------------------------------------------------------------------------*/
 
     /**
@@ -11031,6 +11076,7 @@
     lodash.groupBy = groupBy;
     lodash.indexBy = indexBy;
     lodash.initial = initial;
+    lodash.inRange = inRange;
     lodash.intersection = intersection;
     lodash.invert = invert;
     lodash.invoke = invoke;
